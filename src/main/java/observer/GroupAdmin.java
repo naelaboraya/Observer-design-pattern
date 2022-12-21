@@ -19,7 +19,7 @@ public class GroupAdmin implements Sender{
     private UndoableStringBuilder USB_state;
 
     public GroupAdmin(){
-        this.name="sender";
+        this.name="ZZ";
         this.observers = new ArrayList<>();
         this.USB_state = new UndoableStringBuilder();
     }
@@ -35,7 +35,7 @@ public class GroupAdmin implements Sender{
     @Override
     public void register(Member obj) {
         this.observers.add(obj);
-        obj.update(USB_state);
+        obj.update(this.getState());
     }
 
     @Override
@@ -71,7 +71,13 @@ public class GroupAdmin implements Sender{
 
     public void notifyAllObservers(){
         for (Member observer : observers){
-            observer.update(USB_state);
+            observer.update(this.getState());
+        }
+    }
+
+    public void printallobervers(){
+        for (Member observer : observers){
+            System.out.println(observer);
         }
     }
 

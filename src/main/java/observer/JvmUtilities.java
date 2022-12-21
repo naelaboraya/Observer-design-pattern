@@ -37,8 +37,9 @@ public final class JvmUtilities {
     }
 
     public static String memoryStats(Object o){
-        return JvmUtilities.objectTotalSize(o) +
-                "\n" +JvmUtilities.objectFootprint(o);
+        return "<zobre>\n"+JvmUtilities.objectTotalSize(o) +
+                "\n" +JvmUtilities.objectFootprint(o) +
+                "\n" + "</zobre>";
     }
 
 

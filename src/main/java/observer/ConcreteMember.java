@@ -8,36 +8,37 @@ package observer;
  */
 public class ConcreteMember implements Member{
     private String name;//the observer name
-    private UndoableStringBuilder observer_state;
-    private GroupAdmin sender;
+    private UndoableStringBuilder observer_state;//the state of this observer
 
-    /*
+
+
+
     public UndoableStringBuilder getstate(){
         return this.observer_state;
     }
-   */
 
 
-    public ConcreteMember(GroupAdmin sender , String name ){
-        this.sender = sender;
+    public ConcreteMember(String name){
         this.name = name;
     }
-    //stamm
+
     @Override
     public void update(UndoableStringBuilder usb) {
-        observer_state = this.sender.getState();
+        UndoableStringBuilder copy = new UndoableStringBuilder();
+        copy.append(usb.toString());
+        observer_state = copy;
     }
+
 
     @Override
     public String toString() {
         return "ConcreteMember{" +
                 "name='" + name + '\'' +
                 ", observer_state=" + observer_state +
-                ", sender=" + sender +
+
                 '}';
     }
 }
 
 
 
-/// shallow copy State !!!!! ????
