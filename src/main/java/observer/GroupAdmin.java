@@ -4,15 +4,22 @@ import java.util.*;
 
 /**
  * This class represents the "observable" that sends notification to its observers when a change happen to the
- * {@code state} ({@code UndoableStringBuilder})
- *
+ * state ({@code UndoableStringBuilder})
+ * In this class , the state's type is UndoableStringBuilder , the observers are stored in a Hashmap , Members as keys
+ * and their names as values.
+ * <p>This class has 3 main methods : {@code register} which registers a Member to this GroupAdmin , {@code unregister}
+ * which unregisters a Member and {@code notifyAllMembers} which notifies/updates the registered Members that a change
+ * happened to the state of this GroupAdmin.
  * @author Nael Aboraya , Marwan Hresh
  */
 public class GroupAdmin implements Sender{
 
 
     private UndoableStringBuilder USB_state;//the state..
-    private Map<Member,String> observers ;//Map of observers that should be notified in case of change to the state.
+
+    //A Map of observers that should be notified in case of change to the state. (The key is the Member itself , and the
+    // value is the name of the Member)
+    private Map<Member,String> observers ;
 
 
     /**
@@ -21,7 +28,7 @@ public class GroupAdmin implements Sender{
      */
     public GroupAdmin(){
         this.USB_state = new UndoableStringBuilder();//the subject state
-        this.observers = new HashMap<>();//list of all observers that observe this group admin
+        this.observers = new HashMap<>();//initializing the map of all observers that observe this group admin
     }
 
 
@@ -31,10 +38,8 @@ public class GroupAdmin implements Sender{
      * <p>gets the current state/UndoableStringBuilder of this observable.
      * @return {@code USB_state} (the state of this observable).
      */
-    public UndoableStringBuilder getState()
-    {
+    public UndoableStringBuilder getState(){
         return this.USB_state;
-
     }
 
     /**
@@ -59,16 +64,14 @@ public class GroupAdmin implements Sender{
         //checking if the member is registered to this GroupAdmin
         if(this.observers.containsKey(obj))
             throw new RuntimeException("The member is already registered to this GroupAdmin !");
-
         //checking if the member is registered to another GroupAdmin
         if(!this.observers.containsKey(obj) && ((ConcreteMember)obj).isRegistered==true)
             throw new RuntimeException("The member is registered to another GroupAdmin !");
         //else (the member is not registered to any GroupAdmin)
         this.observers.put(obj,((ConcreteMember)obj).getName());
+        obj.update(this.getState());
         ((ConcreteMember) obj).isRegistered = true;
-        //((ConcreteMember) obj).isRigestered=true;
-        //((ConcreteMember) obj).Group_Admin= this;
-        //obj.update(this.getState());
+
     }
 
 
@@ -81,7 +84,7 @@ public class GroupAdmin implements Sender{
     @Override
     public void unregister(Member obj) throws NoSuchElementException {
         if(!this.observers.containsKey(obj))
-            throw new NoSuchElementException("Observer is not registered");
+            throw new NoSuchElementException("Observer is not registered !");
         this.observers.remove(obj);
         obj.update(null);
         ((ConcreteMember) obj).isRegistered = false;
@@ -94,9 +97,10 @@ public class GroupAdmin implements Sender{
      * observable that a change has happened to the state/UndoableStringBuilder.
      * @param offset
      * @param obj
+     * @throws StringIndexOutOfBoundsException  if the offset is invalid
      */
     @Override
-    public void insert(int offset, String obj) {
+    public void insert(int offset, String obj) throws StringIndexOutOfBoundsException{
         this.USB_state.insert(offset,obj);
         notifyAllObservers();
     }
@@ -121,9 +125,12 @@ public class GroupAdmin implements Sender{
      * observable that a change has happened to the state/UndoableStringBuilder.
      * @param start
      * @param end
+     * @throws StringIndexOutOfBoundsException if {@code start}
+     * is negative, greater than {@code length()}, or
+     * greater than {@code end}.
      */
     @Override
-    public void delete(int start, int end) {
+    public void delete(int start, int end) throws StringIndexOutOfBoundsException{
         this.USB_state.delete(start,end);
         notifyAllObservers();
     }
@@ -152,15 +159,19 @@ public class GroupAdmin implements Sender{
         }
     }
 
-    //A method that prints all the observers that observe this observable (prints all the observers in the list of observers).
-    public void printallobervers(){
-        for (Map.Entry<Member, String> entry : observers.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
+    //A method that prints all the observers that are observing this observable.
+//    public void printallobervers(){
+//        for (Map.Entry<Member, String> entry : observers.entrySet()) {
+//            System.out.println(entry.getKey() + ": " + entry.getValue());
+//        }
+//    }
+
+    public Map<Member,String> getallobervers(){
+        return this.observers;
     }
 
 
-    //toString method , describes this observable
+    //toString : describes this observable
     @Override
     public String toString() {
         return this.USB_state+","+this.observers.toString();

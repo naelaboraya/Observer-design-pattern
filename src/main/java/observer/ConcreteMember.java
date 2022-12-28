@@ -2,7 +2,7 @@ package observer;
 
 /**
  * This class represents the "observer" that gets notified when a change happens to the
- * {@code GroupAdmin} {@code state} ({@code UndoableStringBuilder})
+ * {@code GroupAdmin} state ({@code UndoableStringBuilder})
  *
  *  @author Nael Aboraya , Marwan Hresh
  */
@@ -11,20 +11,37 @@ public class ConcreteMember implements Member{
     private String name;//the name of the observer
     private UndoableStringBuilder observer_state;//the state of this observer (changes when the GroupAdmin notifies it)
 
-
+    //setting the observer as not registered (default state):
     final boolean Default = false;
     public boolean isRegistered = Default;
 
-    //Constructor : takes nothing
+    /**
+     * Constructor
+     * <p>Takes nothing , sets the name of the observer as "Anonymous".
+     */
     public ConcreteMember(){this.name="Anonymous";}
-    //Constructor : takes a name as String and puts it to this observer
+
+    /**
+     * Constructor
+     * <p>Takes a name as String and puts it to this observer.
+     * @param name
+     */
     public ConcreteMember(String name){
         this.name = name;
     }
 
+
+    /**
+     *
+     * @return the state/UndoableStringBuilder of this observer.
+     */
     public UndoableStringBuilder getstate(){return this.observer_state;}
 
 
+    /**
+     *
+     * @return the name of this observer.
+     */
     public String getName(){return this.name;}
 
 
@@ -37,21 +54,15 @@ public class ConcreteMember implements Member{
      */
     @Override
     public void update(UndoableStringBuilder usb) {
-//        UndoableStringBuilder copy = new UndoableStringBuilder();
-//        copy.append(usb.toString());
-//        observer_state = copy;
         observer_state=usb;
-
-
     }
 
-
+    //toString : describes this observer
     @Override
     public String toString() {
         return "ConcreteMember{" +
                 "name='" + name + '\'' +
                 ", observer_state=" + observer_state +
-
                 '}';
     }
 }

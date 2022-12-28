@@ -206,7 +206,7 @@ class UndoableStringBuilderTest {
         sb.undo();
         assertEquals("String",sb.toString());
         sb.undo();
-        assertEquals("String",sb.toString());//should be back to first state ("String") , and not ""
+        assertEquals("",sb.toString());
 
     }
 }
