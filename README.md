@@ -9,16 +9,64 @@ This project is a Java implementation of the Observer design pattern using the U
 
 * UndoableStringBuilder: This class represents the observable state that is being observed.
 * GroupAdmin: This class implements the Sender interface (observable) and is responsible for maintaining a list of observers (ConcreteMembers) and notifying them of   changes to the UndoableStringBuilder.
+
+   GroupAdmin has 3 main method : 
+    * <strong>register</strong> : registers a member to the GroupAdmin , adds the member to the data structure used to store members , updates the member's state.
+    
+     ```
+  public void register(Member obj) {
+        if(this.observers.containsKey(obj))
+            throw new RuntimeException("The member is already registered to this GroupAdmin !");
+        if(!this.observers.containsKey(obj) && ((ConcreteMember)obj).isRegistered==true)
+            throw new RuntimeException("The member is registered to another GroupAdmin !");
+        this.observers.put(obj,((ConcreteMember)obj).getName());
+        obj.update(this.getState());
+        ((ConcreteMember) obj).isRegistered = true;
+
+    }
+    ```
+    
+    * <strong>unregister</strong> : unregisteres a member , deletes the member from the data structure used to store members , sets the state of the member to bell null.
+    
+    ```
+     public void unregister(Member obj) throws NoSuchElementException {
+        if(!this.observers.containsKey(obj))
+            throw new NoSuchElementException("Observer is not registered !");
+        this.observers.remove(obj);
+        obj.update(null);
+        ((ConcreteMember) obj).isRegistered = false;
+    }
+    ```
+    * <strong>notifyAllObservers</strong> : notifies all the members that are registered to the GroupAdmin that a change has happened , updates all the members states.
+    ```
+    private void notifyAllObservers(){
+        for (Member observer : observers.keySet()) {
+            observer.update(this.getState());
+        }
+    }
+    ```
+
+ 
+  
 * ConcreteMember: This class implements the Member interface , it represents the observer , and the object of type ConcreteMember should be updated when a change happen to the GroupAdmin object that it observes.
+
+  ConcreteMember has 1 main method :
+   * <strong>update</strong> : takes a UndoableStringBuilder as an input and updates the member's state to be this UndoableStringBuilder.
+   ```
+  public void update(UndoableStringBuilder usb) {
+        observer_state=usb;
+    }
+  ```
 
 ### Data structures used in the project
 
 * Hashmap<Member,String> : to store the observers in GroupAdmin class , the hashmap key is the Member that observes the GroupAdmin and the value is the observer's name , we used a hashmap instead of other data structures like ArrayList for example because the operations on Hashmap are faster and most of them take O(1) time.
-* LinkedList<String> : in UndoableStringBuilder class , in order to save the history of the string states and to enable undo operation , we stored the states of the string in a LinkedList , we used a LinkedList because it is more efficient in terms of memory than other data structures like stack for example. 
 
 ```
 private Map<Member,String> observers;
 ```
+
+* LinkedList<String> : in UndoableStringBuilder class , in order to save the history of the string states and to enable undo operation , we stored the states of the string in a LinkedList , we used a LinkedList because it is more efficient in terms of memory than other data structures like stack for example. 
 
 ```
 private LinkedList<String> history;
