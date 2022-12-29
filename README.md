@@ -40,7 +40,8 @@ The memory usage test is performed using JvmUtilities class which has 3 static m
 
 ### UML diagram
 
-![diagram](https://user-images.githubusercontent.com/94143804/209967600-051be0d9-7f4d-4aef-9221-a208cd501ddb.png)
+![UML](https://user-images.githubusercontent.com/94143804/209970009-1c7f2704-bc43-41d1-a3bd-dc30c9ec6ae4.jpg)
+
 
 
 ### Installation and setup
