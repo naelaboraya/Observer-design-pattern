@@ -3,9 +3,9 @@
 Implementing Observer design pattern in java with UndoableStringBuilder.
 
 ## Overview
-The observer design pattern is a behavioral design pattern that allows an object (observer) to receive updates from another object (subject) when the subject's state changes. The observer subscribes to the subject and is notified whenever the subject's state changes. The observer can then perform some action based on this notification. This allows for a separation of concerns, as the subject does not need to know how its state is being used or what action is being taken as a result of the state change. The observer design pattern is commonly used in applications to implement event handling, logging, and other types of reactive programming.
+The Observer design pattern is a behavioral design pattern that allows an object (observer) to receive updates from another object (subject) when the subject's state changes. The observer subscribes to the subject and is notified whenever the subject's state changes. The observer can then perform some action based on this notification. This allows for a separation of concerns, as the subject does not need to know how its state is being used or what action is being taken as a result of the state change. The observer design pattern is commonly used in applications to implement event handling, logging, and other types of reactive programming.
 
-This project is a Java implementation of the Observer design pattern using the UndoableStringBuilder as the observable state. The main package, observer, contains the following classes:
+This project is a Java implementation of the Observer design pattern using the UndoableStringBuilder as the observable state , the main package, observer, contains the following classes:
 
 * UndoableStringBuilder: This class represents the observable state that is being observed.
 * GroupAdmin: This class implements the Sender interface (observable) and is responsible for maintaining a list of observers (ConcreteMembers) and notifying them of   changes to the UndoableStringBuilder.
@@ -38,6 +38,9 @@ The memory usage test is performed using JvmUtilities class which has 3 static m
   ![tst2B](https://user-images.githubusercontent.com/94143804/209948114-c7989e13-4d6a-453b-bcf8-2d34327ed17c.jpg)
   ![tst3B](https://user-images.githubusercontent.com/94143804/209948133-7b0e35b9-b7a9-4441-b440-29bd1af7bb80.jpg)
 
+### UML diagram
+
+![diagram](https://user-images.githubusercontent.com/94143804/209967600-051be0d9-7f4d-4aef-9221-a208cd501ddb.png)
 
 
 ### Installation and setup
