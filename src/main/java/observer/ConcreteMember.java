@@ -19,7 +19,10 @@ public class ConcreteMember implements Member{
      * Constructor
      * <p>Takes nothing , sets the name of the observer as "Anonymous".
      */
-    public ConcreteMember(){this.name="Anonymous";}
+    public ConcreteMember(){
+        this.observer_state = null; //initializing the state to be null.
+        this.name="Anonymous";
+    }
 
     /**
      * Constructor
@@ -27,6 +30,7 @@ public class ConcreteMember implements Member{
      * @param name
      */
     public ConcreteMember(String name){
+        this.observer_state = null; //initializing the state to be null
         this.name = name;
     }
 

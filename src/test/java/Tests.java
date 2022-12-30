@@ -9,6 +9,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+
+
+/**
+ * This class is for testng the methods of classes {@code GroupAdmin} and {@code ConcreteMember}.
+ * <p>This class mainly checks the methods : register() and unregister() , it also checks the change of the ConcreteMember state
+ * relative to the GroupAdmin state and checks notifyAllObservers method (testRegister() , testUnregister() and testOperations() test cases).
+ * <p>This class also checks the size of the objects in the memory and displays it on the console (testObjectSize() test case).
+ * <p>In the test cases, the method {@code equals} that was implemented in
+ * {@code UndoableStringBuilder} class is used to check/compare results.
+ * <p>Note that {@code assertEquals} method works with {@code equals} method that was overridden
+ * in {@code UndoableStringBuilder} class.
+ * @see UndoableStringBuilder
+ * @see GroupAdmin
+ * @see ConcreteMember
+ * @author Nael Aboraya , Marwan Hresh
+ */
 public class Tests {
     public static final Logger logger = LoggerFactory.getLogger(Tests.class);
     // stub method to check external dependencies compatibility

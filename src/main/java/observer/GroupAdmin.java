@@ -174,6 +174,6 @@ public class GroupAdmin implements Sender{
     //toString : describes this observable
     @Override
     public String toString() {
-        return this.USB_state+","+this.observers.toString();
+        return "state : "+this.USB_state+" , observers : "+this.observers.toString();
     }
 }
