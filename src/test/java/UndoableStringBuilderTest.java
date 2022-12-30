@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * in {@code UndoableStringBuilder} class.
  * @see UndoableStringBuilder
  * @author Nael Aboraya , Marwan Hresh
- */
+ */ 
 class UndoableStringBuilderTest {
     //some objects to do tests on them
     UndoableStringBuilder ssb = new UndoableStringBuilder();
